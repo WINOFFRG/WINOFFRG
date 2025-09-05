@@ -1,0 +1,41 @@
+---
+export interface Props {
+  href: string;
+  label: string;
+  icon?: string;
+  external?: boolean;
+}
+
+const { href, label, icon, external = true } = Astro.props;
+
+const externalProps = external
+  ? {
+      target: "_blank",
+      rel: "noopener noreferrer",
+    }
+  : {};
+---
+
+<a
+  href={href}
+  aria-label={label}
+  tabindex="0"
+  class="group inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-full bg-gray-800 px-4 font-medium text-white select-none hover:bg-gray-700 active:scale-95 transition-all duration-200"
+  {...externalProps}
+>
+  <span>{label}</span>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    class="stroke-current size-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200"
+  >
+    <path
+      d="M18 15V6M18 6H9M18 6L6.25 17.75"
+      stroke-width="2.25"
+      stroke-linecap="round"
+      stroke-linejoin="round"></path>
+  </svg>
+</a>
