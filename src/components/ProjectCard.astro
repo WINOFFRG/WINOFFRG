@@ -4,10 +4,11 @@ export interface Props {
   description: string;
   href: string;
   icon?: string;
+  image?: string;
   external?: boolean;
 }
 
-const { title, description, href, icon, external = true } = Astro.props;
+const { title, description, href, icon, image, external = true } = Astro.props;
 
 const externalProps = external
   ? {
@@ -21,62 +22,78 @@ const externalProps = external
   href={href}
   aria-label={title}
   tabindex="0"
-  class="group flex h-64 flex-col rounded-xl bg-gray-100 border border-gray-200 p-1 transition-all duration-200 ease-out hover:bg-gray-200 hover:border-gray-300 focus-visible:ring-2 focus-visible:ring-gray-400"
+  class="group flex h-64 flex-col rounded-xl bg-neutral-800 border border-neutral-700 p-1 transition-all duration-200 ease-out"
+  style="--hover-bg: theme(colors.neutral.700); --hover-border: theme(colors.neutral.600);"
   {...externalProps}
 >
-  <div
-    class="relative flex h-full w-full items-center justify-center gap-2 rounded-lg border border-gray-700 bg-gray-800"
-  >
-    <!-- Grid pattern background -->
-    <div
-      class="absolute top-1/2 left-1/2 flex h-full translate-x-[-50%] translate-y-[-50%] gap-32"
-    >
-      <span class="h-full border-l border-dashed border-gray-600"></span>
-      <span class="h-full border-l border-dashed border-gray-600"></span>
-    </div>
-    <div
-      class="absolute top-1/2 left-1/2 flex w-full translate-x-[-50%] translate-y-[-50%] flex-col gap-24"
-    >
-      <span class="w-full border-t border-dashed border-gray-600"></span>
-      <span class="w-full border-b border-dashed border-gray-600"></span>
-    </div>
+  {
+    image ? (
+      <div class="relative h-full w-full rounded-lg overflow-hidden">
+        <img
+          src={image}
+          alt={title}
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+        />
+        <div class="absolute inset-0 bg-black-20 group-hover:bg-black-10 transition-colors duration-200" />
+      </div>
+    ) : (
+      <div class="relative flex h-full w-full items-center justify-center gap-2 rounded-lg border border-neutral-700 bg-neutral-800">
+        <div class="absolute top-1/2 left-1/2 flex h-full translate-x-[-50%] translate-y-[-50%] gap-32">
+          <span class="h-full border-l border-dashed border-neutral-600" />
+          <span class="h-full border-l border-dashed border-neutral-600" />
+        </div>
+        <div class="absolute top-1/2 left-1/2 flex w-full translate-x-[-50%] translate-y-[-50%] flex-col gap-24">
+          <span class="w-full border-t border-dashed border-neutral-600" />
+          <span class="w-full border-b border-dashed border-neutral-600" />
+        </div>
 
-    <!-- Icon container -->
-    <div
-      class="flex size-14 shrink-0 items-center justify-center rounded-xl bg-gray-700 border border-gray-600 shadow-sm group-hover:border-gray-500 transition-colors duration-200"
-    >
-      {
-        icon ? (
-          <div class="text-white size-8" set:html={icon} />
-        ) : (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            class="stroke-white size-8"
-          >
-            <path
-              d="M12 2C12.5917 2 13.1713 2.05139 13.7348 2.14994M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22M12 2V22M17.738 3.809C18.6922 4.47869 19.5241 5.31089 20.1934 6.26541M21.8501 10.2656C21.9486 10.8289 22 11.4085 22 12C22 12.5915 21.9486 13.1711 21.8501 13.7344M20.1892 17.7406C19.5203 18.693 18.6896 19.5233 17.7369 20.1917M13.7328 21.8504C13.17 21.9487 12.591 22 12 22"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        )
-      }
-    </div>
-  </div>
-
-  <!-- Project info -->
+        <div class="flex size-14 shrink-0 items-center justify-center rounded-xl bg-neutral-700 border border-neutral-600 shadow-sm group-hover:border-neutral-500 transition-colors duration-200">
+          {icon ? (
+            <div class="text-white size-8" set:html={icon} />
+          ) : (
+            <div class="text-white size-8 flex items-center justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                class="stroke-current"
+              >
+                <path
+                  d="M12 2L2 7L12 12L22 7L12 2Z"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M2 17L12 22L22 17"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M2 12L12 17L22 12"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+          )}
+        </div>
+      </div>
+    )
+  }
   <div
     class="flex w-full flex-col items-start justify-center gap-[2px] p-2 font-medium"
   >
     <span
-      class="text-gray-900 leading-6 group-hover:text-gray-700 transition-colors duration-200"
+      class="text-white leading-6 group-hover:text-neutral-200 transition-colors duration-200 line-clamp-1"
       >{title}</span
     >
-    <span class="text-gray-600 leading-6 font-normal">{description}</span>
+    <span class="text-neutral-400 leading-6 font-normal line-clamp-2"
+      >{description}</span
+    >
   </div>
 </a>

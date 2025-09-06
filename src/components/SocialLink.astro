@@ -1,5 +1,5 @@
 ---
-export interface Props {
+interface Props {
   href: string;
   label: string;
   icon?: string;
@@ -20,7 +20,8 @@ const externalProps = external
   href={href}
   aria-label={label}
   tabindex="0"
-  class="group inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-full bg-gray-800 px-4 font-medium text-white select-none hover:bg-gray-700 active:scale-95 transition-all duration-200"
+  class="group inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-full bg-neutral-800 px-4 font-medium text-white select-none active:scale-95 transition-all duration-200"
+  style="--hover-bg: theme(colors.neutral.700);"
   {...externalProps}
 >
   <span>{label}</span>

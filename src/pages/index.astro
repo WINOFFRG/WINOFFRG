@@ -1,125 +1,91 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import SocialLink from "../components/SocialLink.astro";
-import ProjectCard from "../components/ProjectCard.astro";
-import FilterButton from "../components/FilterButton.astro";
+import Layout from "@/layouts/Layout.astro";
+import SocialLink from "@/components/SocialLink.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
+import profileImage from "@/assets/profile.jpeg";
+import oiaUiaGif from "@/assets/oia-uia.gif";
 
-// Sample data - replace with your actual data
 const projects = [
   {
-    title: "Project One",
-    description: "A beautiful project that showcases modern design principles.",
-    href: "https://example.com/project1",
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="stroke-current size-8">
-      <path d="M12 2C12.5917 2 13.1713 2.05139 13.7348 2.14994M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22M12 2V22M17.738 3.809C18.6922 4.47869 19.5241 5.31089 20.1934 6.26541M21.8501 10.2656C21.9486 10.8289 22 11.4085 22 12C22 12.5915 21.9486 13.1711 21.8501 13.7344M20.1892 17.7406C19.5203 18.693 18.6896 19.5233 17.7369 20.1917M13.7328 21.8504C13.17 21.9487 12.591 22 12 22" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>`,
+    title: "Limeplay UI",
+    description:
+      "Modern UI library for building video players using Shaka Player & shadcn/ui",
+    href: "https://limeplay.winoffrg.dev",
+    image: "https://limeplay.winoffrg.dev/opengraph-image.png",
   },
   {
-    title: "Project Two",
-    description: "Another amazing project with innovative solutions.",
-    href: "https://example.com/project2",
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="stroke-current size-8">
-      <path d="M11.3177 1.59373C10.7057 1.59373 10.0646 1.53665 9.45782 1.60407C8.5812 1.70147 7.5081 2.33746 6.74219 2.7914L6.71444 2.80784C5.41647 3.57701 4.43353 4.50712 3.39243 5.57188C1.87215 7.12672 1.36719 9.54153 1.36719 11.6424C1.36719 12.5369 1.37331 13.3655 1.53251 14.2412C1.78909 15.6523 2.39608 16.6745 3.3201 17.775C4.28503 18.9242 5.44319 19.9932 6.61628 20.9317C7.23096 21.4234 7.81252 21.8613 8.57953 22.0993C9.56366 22.4047 10.6692 22.4248 11.6897 22.4248C12.6478 22.4248 13.6027 22.4618 14.5519 22.3111C15.4617 22.1667 16.4801 21.82 17.3573 21.5362C18.2965 21.2323 18.9888 20.7984 19.6822 20.1051C20.4483 19.3389 21.2578 18.4749 21.7333 17.496C22.3061 16.3166 22.5702 14.9815 22.5702 13.678C22.5702 12.417 22.7518 10.9461 22.4979 9.70503C22.2407 8.44777 21.3558 7.09565 20.5243 6.14536C20.036 5.58733 19.422 4.68051 18.7574 4.31128C17.9553 3.86567 17.1771 3.36097 16.3395 2.94217C15.7146 2.62972 14.9919 2.13631 14.2936 2.05871C13.7635 1.99981 13.3337 1.77972 12.7592 1.77972C12.1969 1.77972 11.6823 1.68673 11.1317 1.68673M6.78693 13.8262C6.78693 14.0505 7.23396 14.3769 7.39823 14.5055C7.68584 14.7306 8.01913 14.9818 8.36173 15.1042C8.51034 15.1573 8.65435 15.2435 8.80449 15.3004C9.23904 15.4653 9.68542 15.5395 10.1378 15.64C10.7601 15.7783 11.3322 15.8187 11.9692 15.8187C12.4687 15.8187 12.9899 15.8603 13.4861 15.7935C14.4389 15.6652 15.5023 15.2967 16.3012 14.752C16.6181 14.536 16.9197 14.2553 17.2471 14.0627C17.3689 13.9911 17.5949 13.8551 17.6546 13.7357" stroke-width="2" stroke-linecap="round"/>
-    </svg>`,
+    title: "OTTPRO Extension",
+    description:
+      "Patches for OTT Platforms, bypass Netflix household device blocking",
+    href: "https://ottpro.winoffrg.dev",
+    image:
+      "https://github.com/WINOFFRG/ottpro/blob/master/assets/github_banner.png?raw=true",
   },
 ];
-
-const workItems = [
-  {
-    title: "Design System Components",
-    date: "December 2024",
-    href: "/work/design-system",
-    image: "/work-previews/design-system.png",
-    imageDark: "/work-previews/design-system-dark.png",
-    type: "components" as const,
-  },
-  {
-    title: "Building Modern UIs",
-    date: "November 2024",
-    href: "/work/modern-uis",
-    image: "/work-previews/modern-uis.png",
-    imageDark: "/work-previews/modern-uis-dark.png",
-    type: "writing" as const,
-  },
-  {
-    title: "Animation Techniques",
-    date: "October 2024",
-    href: "/work/animations",
-    image: "/work-previews/animations.png",
-    imageDark: "/work-previews/animations-dark.png",
-    type: "components" as const,
-  },
-  {
-    title: "CSS Best Practices",
-    date: "September 2024",
-    href: "/work/css-practices",
-    image: "/work-previews/css-practices.png",
-    imageDark: "/work-previews/css-practices-dark.png",
-    type: "writing" as const,
-  },
-];
-
-const writingIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-  <path fill-rule="evenodd" clip-rule="evenodd" d="M3.5 5.5C3.5 3.84315 4.84315 2.5 6.5 2.5H17.5C19.1569 2.5 20.5 3.84315 20.5 5.5V18.5C20.5 20.1569 19.1569 21.5 17.5 21.5H6.5C4.84315 21.5 3.5 20.1569 3.5 18.5V5.5ZM8 8C8 7.44772 8.44772 7 9 7H15C15.5523 7 16 7.44772 16 8C16 8.55228 15.5523 9 15 9H9C8.44772 9 8 8.55228 8 8ZM8 12C8 11.4477 8.44772 11 9 11H12C12.5523 11 13 11.4477 13 12C13 12.5523 12.5523 13 12 13H9C8.44772 13 8 12.5523 8 12Z" />
-</svg>`;
-
-const componentsIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-  <path d="M13.4141 2.24985C12.633 1.4688 11.3667 1.4688 10.5856 2.24985L8.49985 4.33564C7.7188 5.11669 7.7188 6.38302 8.49985 7.16406L10.5856 9.24985C11.3667 10.0309 12.633 10.0309 13.4141 9.24985L15.4999 7.16406C16.2809 6.38301 16.2809 5.11668 15.4998 4.33564L13.4141 2.24985Z" />
-  <path d="M7.16406 8.49985C6.38301 7.7188 5.11668 7.7188 4.33564 8.49985L2.24985 10.5856C1.4688 11.3667 1.4688 12.633 2.24985 13.4141L4.33564 15.4999C5.11669 16.2809 6.38302 16.2809 7.16406 15.4998L9.24985 13.4141C10.0309 12.633 10.0309 11.3667 9.24985 10.5856L7.16406 8.49985Z" />
-  <path d="M19.6641 8.49985C18.883 7.7188 17.6167 7.7188 16.8356 8.49985L14.7498 10.5856C13.9688 11.3667 13.9688 12.633 14.7498 13.4141L16.8356 15.4999C17.6167 16.2809 18.883 16.2809 19.6641 15.4998L21.7499 13.4141C22.5309 12.633 22.5309 11.3667 21.7498 10.5856L19.6641 8.49985Z" />
-  <path d="M13.4141 14.7498C12.633 13.9688 11.3667 13.9688 10.5856 14.7498L8.49985 16.8356C7.7188 17.6167 7.7188 18.883 8.49985 19.6641L10.5856 21.7499C11.3667 22.5309 12.633 22.5309 13.4141 21.7498L15.4999 19.6641C16.2809 18.883 16.2809 17.6167 15.4998 16.8356L13.4141 14.7498Z" />
-</svg>`;
 ---
 
 <Layout
-  title="Your Name - Portfolio"
-  description="Design engineer & designer building products that feel magical, yet simple and intuitive."
+  title="Rohan Gupta - Portfolio"
+  description="Software engineer at Zomato, building video players and OTT technologies."
 >
   <div
     class="mx-auto max-w-2xl overflow-x-hidden px-6 py-12 leading-relaxed antialiased sm:py-16 md:overflow-x-visible"
   >
-    <main>
-      <!-- Hero Section -->
-      <h1
-        class="text-white mt-6 mb-6 flex w-full items-center text-2xl font-semibold tracking-tight sm:mt-12 sm:text-3xl"
-      >
-        Hey, I'm Your Name
-      </h1>
-
-      <p class="text-gray-300 mb-8 text-lg leading-relaxed">
-        I'm a design engineer & designer at
-        <a
-          href="https://example.com"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Company Name"
-          tabindex="0"
-          class="text-white hover:text-gray-300 underline underline-offset-4 decoration-gray-500 hover:decoration-gray-300 font-medium transition-colors duration-200"
+    <main class="intro-wrapper group">
+      <div class="flex items-center gap-4 mt-6 mb-6 sm:mt-12">
+        <div class="relative size-10 overflow-hidden flex-shrink-0">
+          <img
+            src={profileImage.src}
+            alt="Rohan Gupta"
+            class="rounded-xl border-2 border-white size-full object-cover transition-opacity duration-300 group-hover:opacity-0"
+          />
+          <img
+            src={oiaUiaGif.src}
+            alt="Hacking animation"
+            class="absolute inset-0 size-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+          />
+        </div>
+        <h1
+          class="text-white flex w-full items-center text-2xl font-semibold tracking-tight sm:text-3xl"
         >
-          Company Name
-        </a>. I design and build products that feel magical, yet simple and
-        intuitive. I obsess over the smallest details and I like to make people
-        feel something through my work.
-      </p>
-
-      <!-- Social Links -->
-      <div class="mt-8 flex w-full flex-wrap justify-start gap-3">
-        <SocialLink href="mailto:your@email.com" label="Mail" />
-        <SocialLink href="https://twitter.com/yourusername" label="Twitter" />
-        <SocialLink href="https://github.com/yourusername" label="GitHub" />
+          Hey, I'm Rohan Gupta
+        </h1>
       </div>
 
-      <!-- Projects Section -->
-      <section class="mt-24 w-full sm:mt-32">
-        <h2
-          class="text-white mb-6 flex w-full items-center text-xl font-semibold"
+      <p class="intro-paragraph text-neutral-300 mb-8 text-lg leading-relaxed">
+        I'm a software engineer at
+        <a
+          href="https://zomato.com"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Zomato"
+          tabindex="0"
+          class="text-white hover:text-neutral-300 underline underline-offset-4 decoration-neutral-500 hover:decoration-neutral-300 font-medium transition-colors duration-200"
         >
-          Projects
-        </h2>
-        <div class="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
-          {projects.map((project) => <ProjectCard {...project} />)}
-        </div>
-      </section>
+          Zomato
+        </a>. I love working with OTT technologies and have expertise in
+        building video players. I’m deeply passionate about Reverse Engineering
+        and Web Security, and in my free time, I enjoy exploring applications,
+        hacking into shells, de-obfuscating code, and uncovering
+        vulnerabilities.
+      </p>
     </main>
+
+    <div class="mt-8 flex w-full flex-wrap justify-start gap-3">
+      <SocialLink href="mailto:hi@winoffrg.dev" label="Mail" />
+      <SocialLink href="https://x.com/winoffrg" label="Twitter" />
+      <SocialLink href="https://github.com/winoffrg" label="GitHub" />
+    </div>
+
+    <section class="mt-24 w-full sm:mt-32">
+      <h2
+        class="text-white mb-6 flex w-full items-center text-xl font-semibold"
+      >
+        Projects
+      </h2>
+      <div class="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
+        {projects.map((project) => <ProjectCard {...project} />)}
+      </div>
+    </section>
   </div>
 </Layout>
