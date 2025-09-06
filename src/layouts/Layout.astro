@@ -1,5 +1,6 @@
 ---
-import "../styles/global.css";
+import "@/styles/global.css";
+import Analytics from "@vercel/analytics/astro";
 
 export interface Props {
   title?: string;
@@ -92,6 +93,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         ]
       }
     </script>
+    <Analytics />
   </head>
   <body class="bg-background text-foreground font-sans antialiased">
     <div class="min-h-screen">
