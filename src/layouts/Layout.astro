@@ -10,10 +10,10 @@ export interface Props {
 }
 
 const {
-  title = "Your Name - Portfolio",
-  description = "Design engineer & designer building products that feel magical, yet simple and intuitive.",
-  image = "/og-image.jpg",
-  url = "https://yourportfolio.com",
+  title = "Rohan Gupta - Portfolio",
+  description = "Software engineer at Zomato, Building Limeplay UI",
+  image = "/og-image.svg",
+  url = "https://winoffrg.dev",
   type = "website",
 } = Astro.props;
 
@@ -25,16 +25,18 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- Primary Meta Tags -->
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
 
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content={type} />
     <meta property="og:url" content={url} />
     <meta property="og:title" content={title} />
@@ -44,10 +46,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={title} />
     <meta property="og:image:type" content="image/png" />
-    <meta property="og:site_name" content="Your Name" />
+    <meta property="og:site_name" content="Rohan Gupta" />
     <meta property="og:locale" content="en_US" />
 
-    <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={url} />
     <meta property="twitter:title" content={title} />
@@ -58,44 +59,39 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="twitter:image:alt" content={title} />
     <meta property="twitter:image:type" content="image/png" />
 
-    <!-- Additional Meta Tags -->
     <meta name="robots" content="index, follow" />
-    <meta name="author" content="Your Name" />
+    <meta name="author" content="Rohan Gupta" />
     <meta name="theme-color" content="var(--color-background)" />
 
-    <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <!-- Geist Font -->
     <link
       href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
-    <!-- Structured Data -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Person",
-        "name": "Your Name",
-        "url": "https://yourportfolio.com",
-        "image": "https://yourportfolio.com/og-image.jpg",
-        "jobTitle": "Design Engineer & Designer",
-        "description": "Design engineer & designer building products that feel magical, yet simple and intuitive.",
+        "name": "Rohan Gupta",
+        "url": "https://winoffrg.dev",
+        "image": "https://winoffrg.dev/og-image.png",
+        "jobTitle": "Software Engineer",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Zomato",
+          "url": "https://zomato.com"
+        },
+        "description": "Software engineer at Zomato, Building Limeplay UI",
         "sameAs": [
-          "https://twitter.com/yourusername",
-          "https://github.com/yourusername",
-          "https://linkedin.com/in/yourusername"
+          "https://x.com/winoffrg",
+          "https://github.com/winoffrg",
+          "https://linkedin.com/in/winoffrg"
         ]
       }
     </script>
-
-    <!-- Vercel Analytics -->
-    <script defer src="https://vercel.com/analytics/script.js"></script>
-
-    <!-- Vercel Speed Insights -->
-    <script defer src="https://vercel.com/speed-insights/script.js"></script>
   </head>
   <body class="bg-background text-foreground font-sans antialiased">
     <div class="min-h-screen">

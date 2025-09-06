@@ -3,7 +3,6 @@
 @theme {
   --color-background: #0a0a0a;
   --color-foreground: #ffffff;
-
   --font-family-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
   --font-family-mono: "Geist Mono", ui-monospace, monospace;
 }
